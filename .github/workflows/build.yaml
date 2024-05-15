@@ -6,7 +6,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Java CI with Maven
+name: Build
 
 on:
   push:
@@ -16,18 +16,32 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
+    services:
+      sql-server:
+        image: mcr.microsoft.com/azure-sql-edge:latest
+        env:
+          ACCEPT_EULA: "Y"
+          MSSQL_SA_PASSWORD: "Your_password123"
+        ports:
+          - 1433:1433
+        # options: --health-cmd "sqlcmd -S localhost -U sa -P Your_password123 -Q 'SELECT 1'" --health-interval 10s --health-timeout 5s --health-retries 7
+
     steps:
-      - name: Checkout code
+      - name: Check out repository
         uses: actions/checkout@v4
+
+      - name: Query SQL Server
+        run: sqlcmd -S localhost -U sa -P Your_password123 -Q 'SELECT 1'
+
       - name: Set up JDK 21
         uses: actions/setup-java@v3
         with:
           java-version: '21'
           distribution: 'temurin'
           cache: maven
+
       - name: Build with Maven
         run: mvn -B package --file pom.xml
 
