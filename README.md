@@ -9,3 +9,5 @@ TODO
 * Upload artifact. To where?
 * Docker image. How? build pack or Dockerfile?
 * Use azure sql database. 
+  * Setup database with "schema/db" and users
+
