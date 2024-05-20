@@ -5,7 +5,7 @@ My Demo Project
 
 TODO
 ----
-
+* Which maven version is used?
 * Upload artifact. To where?
 * split into: system test and system integration test?
 * Docker image. How? build pack or Dockerfile?

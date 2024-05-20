@@ -10,12 +10,13 @@
 	</parent>
 	<groupId>org.eirik</groupId>
 	<artifactId>spring-demo</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>spring-demo</name>
-	<description>Demo project for Spring Boot</description>
+	<version>${revision}</version>
+
 	<properties>
+		<revision>0.0.1-SNAPSHOT</revision>
 		<java.version>21</java.version>
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
