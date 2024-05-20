@@ -16,4 +16,5 @@ TODO
   * database setup?
 * Use sealed secrets?
 * hosted runners for prod deploy
-* 
+
+* Use docker with maven and jdk as build image?
