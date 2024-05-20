@@ -32,7 +32,6 @@ jobs:
         with:
           java-version: 21
           distribution: temurin
-          maven-version: '3.9.6'
           cache: maven
 
       - name: Maven version

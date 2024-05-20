@@ -18,3 +18,9 @@ TODO
 * hosted runners for prod deploy
 
 * Use docker with maven and jdk as build image?
+
+Notes:
+
+build with docker image works.
+What if combined with setup-java?
+or manual config of: cache and settings?
