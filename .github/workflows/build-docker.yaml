@@ -25,6 +25,26 @@ jobs:
           distribution: temurin
           cache: maven
 
+      - name: Set up settings.xml
+        run: |
+          mkdir -p ~/.m2
+          echo "<settings>
+              <mirrors>
+                 <mirror>
+                  <id>bax-mirror</id>
+                  <url>https://pkgs.dev.azure.com/techcloud0/_packaging/bax/maven/v1</url>
+                  <mirrorOf>*</mirrorOf>
+                </mirror>
+             </mirrors>
+                  <servers>
+                    <server>
+                      <id>bax-mirror</id>
+                      <username>techcloud0</username>
+                      <password>${{ secrets.AZURE_PAT_BAXDES_TEMP }}</password>
+                    </server>
+                  </servers>
+                </settings>" > $GITHUB_WORKSPACE/.m2/settings.xml
+
       - name: Java verson
         run: java -version
 
@@ -32,7 +52,7 @@ jobs:
         run: mvn -v
 
       - name: view settings.xml
-        run: cat $GITHUB_WORKSPACE/.m2/settings.xml
+        run: head -5 $GITHUB_WORKSPACE/.m2/settings.xml
 
       - name: Build with Maven
         run: mvn -Drevision=${{ github.sha }} -B package --file pom.xml
