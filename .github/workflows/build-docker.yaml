@@ -46,6 +46,6 @@ jobs:
 #        run: mvn -v
 
       - name: Build with Maven
-        run: mvn -B package --file pom.xml
+        run: mvn -Drevision=${{ github.sha }} -B package --file pom.xml
 
 
