@@ -14,6 +14,15 @@ jobs:
       image: maven:3.9.6-eclipse-temurin-21
 
     steps:
+      - name: Print secret
+        run: echo ${{ secrets.MY_TEST_SECRET }}
+
+      - name: Print sha
+        run: echo ${{ vars.MY_VARIABLE }}
+
+      - name: Print var
+        run: echo ${{ github.sha }}
+
       - name: Check out repository
         uses: actions/checkout@v4
 
