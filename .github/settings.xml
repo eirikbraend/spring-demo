@@ -13,7 +13,7 @@
         <server>
             <id>bax-mirror</id>
             <username>techcloud0</username>
-            <password>env.AZURE_PAT_BAXDES_TEMP</password>
+            <password>${{env.AZURE_PAT_BAXDES_TEMP}}</password>
         </server>
     </servers>
 </settings>
