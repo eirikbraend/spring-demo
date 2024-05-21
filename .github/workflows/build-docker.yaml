@@ -55,7 +55,7 @@ jobs:
         run: head -5 $GITHUB_WORKSPACE/.m2/settings.xml
 
       - name: Build with Maven
-        run: mvn -Drevision=${{ github.sha }} -B package --file pom.xml
+        run: mvn -s $GITHUB_WORKSPACE/.m2/settings.xml -Drevision=${{ github.sha }} -B package --file pom.xml
 #       run: mvn -s $GITHUB_WORKSPACE/.github/settings.xml -Drevision=${{ github.sha }} -B package --file pom.xml
 #        env:
 #          AZURE_PAT_BAXDES_TEMP: ${{ secrets.AZURE_PAT_BAXDES_TEMP }}
