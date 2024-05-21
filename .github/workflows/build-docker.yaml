@@ -27,7 +27,7 @@ jobs:
 
       - name: Set up settings.xml
         run: |
-          mkdir -p ~/.m2
+          mkdir -p $GITHUB_WORKSPACE/.m2
           echo "<settings>
               <mirrors>
                  <mirror>
