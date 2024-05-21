@@ -34,7 +34,7 @@ jobs:
           cache: maven
 
       - name: Java version
-        run: echo java -version
+        run: java -version
 
       - name: Maven version
         run: mvn -v

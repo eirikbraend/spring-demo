@@ -17,10 +17,10 @@ public class MyBean {
     private final DataSource dataSource;
 
 
-    @EventListener(ApplicationReadyEvent.class)
-    public void dbTest() {
-        JdbcClient create =  JdbcClient.create(dataSource);
-        Integer number = create.sql("select 42").query(Integer.class).single();
-        log.info("the number {}", number);
-    }
+//    @EventListener(ApplicationReadyEvent.class)
+//    public void dbTest() {
+//        JdbcClient create =  JdbcClient.create(dataSource);
+//        Integer number = create.sql("select 42").query(Integer.class).single();
+//        log.info("the number {}", number);
+//    }
 }
