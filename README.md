@@ -24,3 +24,9 @@ Notes:
 build with docker image works.
 What if combined with setup-java?
 or manual config of: cache and settings?
+
+How does maven caching work when using docker image?
+
+Don't use azure devops feed as mirror for all dependencies. Only for own artifacts.
+
+Maven *does* filter `${env.FOO}` in `settings.xml`.
