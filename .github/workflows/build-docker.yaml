@@ -9,9 +9,12 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
 
-#    container:
-#      image: maven:3.9.6-eclipse-temurin-21
+    #    container:
+    #      image: maven:3.9.6-eclipse-temurin-21
 
     steps:
 
@@ -26,25 +29,25 @@ jobs:
           cache: maven
 
 
-#      - name: Setup Maven settings.xml
-#        run: |
-#          mkdir -p $GITHUB_WORKSPACE/.m2
-#          echo "<settings>
-#                  <mirrors>
-#                    <mirror>
-#                      <id>bax-mirror</id>
-#                      <url>https://pkgs.dev.azure.com/techcloud0/_packaging/bax/maven/v1</url>
-#                      <mirrorOf>*</mirrorOf>
-#                    </mirror>
-#                  </mirrors>
-#                  <servers>
-#                    <server>
-#                      <id>bax-mirror</id>
-#                      <username>techcloud0</username>
-#                      <password>${{ secrets.AZURE_PAT_BAXDES_TEMP }}</password>
-#                    </server>
-#                  </servers>
-#                </settings>" > $GITHUB_WORKSPACE/.m2/settings.xml
+      #      - name: Setup Maven settings.xml
+      #        run: |
+      #          mkdir -p $GITHUB_WORKSPACE/.m2
+      #          echo "<settings>
+      #                  <mirrors>
+      #                    <mirror>
+      #                      <id>bax-mirror</id>
+      #                      <url>https://pkgs.dev.azure.com/techcloud0/_packaging/bax/maven/v1</url>
+      #                      <mirrorOf>*</mirrorOf>
+      #                    </mirror>
+      #                  </mirrors>
+      #                  <servers>
+      #                    <server>
+      #                      <id>bax-mirror</id>
+      #                      <username>techcloud0</username>
+      #                      <password>${{ secrets.AZURE_PAT_BAXDES_TEMP }}</password>
+      #                    </server>
+      #                  </servers>
+      #                </settings>" > $GITHUB_WORKSPACE/.m2/settings.xml
 
       - name: Java version
         run: java -version
@@ -55,17 +58,22 @@ jobs:
       - name: Build
         run: mvn -Drevision=${{ github.sha }} -B package
 
-  publish:
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-
-    steps:
       - name: Publish package
         run: mvn -Drevision=${{ github.sha }} --batch-mode deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-
+#  publish:
+#    needs: build
+#    runs-on: ubuntu-latest
+#    permissions:
+#      contents: read
+#      packages: write
+#
+#    steps:
+#      - name: Publish package
+#        run: mvn -Drevision=${{ github.sha }} --batch-mode deploy
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#
+#
