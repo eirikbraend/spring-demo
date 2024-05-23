@@ -98,4 +98,10 @@
 		</plugins>
 	</build>
 
+	<profiles>
+		<profile>
+			<id>github</id>
+		</profile>
+	</profiles>
+
 </project>
