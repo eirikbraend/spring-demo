@@ -17,6 +17,7 @@ TODO
 * hosted runners for prod deploy
 * Build docker image and upload to azure container registry
 * Use docker with maven and jdk as build image?
+* publish junit reports?
 
 * for baxdes: Do we need to publish the war file? if workflow also deploys, we can use "in process"
 What about des-test (for system test) and des-core (tdes)?
@@ -30,3 +31,14 @@ Don't use azure devops feed as mirror for all dependencies. Only for own artifac
 Maven *does* filter `${env.FOO}` in `settings.xml`.
 
 Flux/gitops for k8s deployment.
+
+-- next:
+Maven settings:
+* no more mirror of central
+* keep repos in settings.xml or pom.xml?
+* need to have to servers in settings.xml:
+  * one for distribution management server id - with GITHUB_TOKEN
+  * one for each github package repo? - with PAT token
+
+Use test repo in techcloud for testing packages and learn
+pub
