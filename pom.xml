@@ -74,7 +74,7 @@
 		<dependency>
 			<groupId>org.wiremock</groupId>
 			<artifactId>wiremock</artifactId>
-			<version>3.4.1</version>
+			<version>3.7.0</version>
 <!--			<scope>tesllt</scope>-->
 		</dependency>
 
