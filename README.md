@@ -18,6 +18,7 @@ TODO
 * Build docker image and upload to azure container registry
 * Use docker with maven and jdk as build image?
 * publish junit reports?
+* caching of deps not working totally. Why?
 
 * for baxdes: Do we need to publish the war file? if workflow also deploys, we can use "in process"
 What about des-test (for system test) and des-core (tdes)?
@@ -42,3 +43,17 @@ Maven settings:
 
 Use test repo in techcloud for testing packages and learn
 pub
+
+---
+des-system repo:
+why are we updating image tag/version when flux is watching the image/container registry?
+Do we have the same registry for all envs?
+
+https://github.com/techcloud0/demo-infra
+Glossary:
+* service principal
+* federated credentials
+* Azure AD workload identity
+* managed identity with the required permissions, 
+  a service account and a federated identity credential. See detailed instructions
+* Repository structure of des team? Use branches?
