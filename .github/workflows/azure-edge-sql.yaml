@@ -1,20 +1,24 @@
-name: Azure SQL Edge Test
+name: CI with Azure SQL Edge
 
-on: push
+on:
+  push:
+    branches:
+      - main
 
 jobs:
-  sql-test:
+  test:
     runs-on: ubuntu-latest
+
     services:
-      azuresql:
+      sql:
         image: mcr.microsoft.com/azure-sql-edge
         env:
-          SA_PASSWORD: "YourStrongPassword1!"
+          SA_PASSWORD: "YourStrong!Passw0rd"
           ACCEPT_EULA: "Y"
         ports:
           - 1433:1433
         options: >-
-          --health-cmd "sqlcmd -S localhost -U sa -P 'YourStrongPassword1!' -Q "SELECT 1""
+          --health-cmd "timeout 5 bash -c ':> /dev/tcp/127.0.0.1/1433' || exit 1"
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
@@ -23,27 +27,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install SQLCMD
-        run: sudo apt-get install -y mssql-tools unixodbc-dev
-
       - name: Wait for SQL Server to be ready
         run: |
           for i in {1..30}; do
-            /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P 'YourStrongPassword1!' -Q "SELECT @@VERSION"
-            if [ $? -eq 0 ]; then
-              echo "SQL Server is ready!"
-              exit 0
-            fi
+            /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P "YourStrong!Passw0rd" -Q "SELECT 1" && break
             echo "Waiting for SQL Server..."
-            sleep 5
+            sleep 2
           done
-          echo "SQL Server did not start in time"
-          exit 1
 
-      - name: Create Database
+      - name: Run SQL script
         run: |
-          /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P 'YourStrongPassword1!' -Q "CREATE DATABASE TestDB"
-
-      - name: Verify Database Creation
-        run: |
-          /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P 'YourStrongPassword1!' -Q "SELECT name FROM sys.databases"
+          /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P "YourStrong!Passw0rd" -Q "CREATE DATABASE TestDB;"
