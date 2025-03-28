@@ -27,14 +27,21 @@ jobs:
           mvn dependency:get \
           -s "$GITHUB_WORKSPACE/.github/settings.xml" \
           -Dartifact=org.eirik:spring-demo:0.0.1-SNAPSHOT
-          -Ddest="$GITHUB_WORKSPACE/spring-demo-0.0.1-SNAPSHOT.jar" \
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Copy artifact
+        run: |
+          echo "Copying artifact to the workspace..."
+          mvn dependency:copy \
+#          -s "$GITHUB_WORKSPACE/.github/settings.xml" \
+          -Dartifact=org.eirik:spring-demo:0.0.1-SNAPSHOT \
+          -DoutputDirectory=$GITHUB_WORKSPACE
 
       - name: Verify downloaded artifact
         run: |
           echo "Verifying downloaded artifact..."
-          if [ -f "$GITHUB_WORKSPACE/spring-demo-0.0.1-SNAPSHOT.jar" ]; then
+          if [ -f "$GITHUB_WORKSPACEspring-demo-0.0.1-SNAPSHOT.jar" ]; then
             echo "Artifact downloaded successfully."
           else
             echo "Artifact download failed."
