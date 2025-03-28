@@ -35,19 +35,3 @@ jobs:
           mvn dependency:copy \
           -Dartifact=org.eirik:spring-demo:0.0.1-SNAPSHOT \
           -DoutputDirectory=$GITHUB_WORKSPACE
-
-      - name: Verify downloaded artifact
-        run: |
-          echo "Verifying downloaded artifact..."
-          if [ -f "$GITHUB_WORKSPACEspring-demo-0.0.1-SNAPSHOT.jar" ]; then
-            echo "Artifact downloaded successfully."
-          else
-            echo "Artifact download failed."
-            exit 1
-          fi
-      
-        
-        
-
-#          -Dartifact=org.techcloud0:azure-sql-edge:1.0-SNAPSHOT:jar:1.0-SNAPSHOT \
-#          -DremoteRepositories=https://pkgs.dev.azure.com/techcloud0/_packaging/bax/maven/v1
