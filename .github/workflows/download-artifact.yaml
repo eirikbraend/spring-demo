@@ -1,10 +1,7 @@
 name: Download Artifact
 
 on:
-  workflow_run:
-    workflows: ["Build"]
-    types:
-      - success
+  push:
 
 jobs:
   download:
