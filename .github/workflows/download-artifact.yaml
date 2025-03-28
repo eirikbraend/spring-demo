@@ -20,7 +20,7 @@ jobs:
           java-version: 21
           distribution: temurin
           cache: maven
-          
+
       - name: Download artifact
         run: |
           echo "Downloading artifact from the previous workflow..."
@@ -29,8 +29,7 @@ jobs:
           -DgroupId=org.eirik \
           -Dartifact=spring-demo \
           -Dversion=0.0.1-SNAPSHOT \
-          -Dpackaging=jar \
-          -Ddest="$GITHUB_WORKSPACE/spring-demo-0.0.1-SNAPSHOT.jar" \
+#          -Ddest="$GITHUB_WORKSPACE/spring-demo-0.0.1-SNAPSHOT.jar" \
 
       - name: Verify downloaded artifact
         run: |
