@@ -57,3 +57,9 @@ Glossary:
 * managed identity with the required permissions, 
   a service account and a federated identity credential. See detailed instructions
 * Repository structure of des team? Use branches?
+
+todo:
+* terraform
+* package registry
+* dependabot
+* code QL
