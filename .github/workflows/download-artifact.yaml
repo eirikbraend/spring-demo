@@ -32,9 +32,7 @@ jobs:
 
       - name: Copy artifact
         run: |
-          echo "Copying artifact to the workspace..."
           mvn dependency:copy \
-#          -s "$GITHUB_WORKSPACE/.github/settings.xml" \
           -Dartifact=org.eirik:spring-demo:0.0.1-SNAPSHOT \
           -DoutputDirectory=$GITHUB_WORKSPACE
 
