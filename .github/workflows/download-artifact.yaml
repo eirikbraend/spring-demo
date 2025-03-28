@@ -1,0 +1,42 @@
+name: Download Artifact
+
+on:
+  workflow_run:
+    workflows: ["Build"]
+    types:
+      - success
+
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read
+
+    steps:
+      - name: Download artifact
+        run: |
+          echo "Downloading artifact from the previous workflow..."
+          mvn dependency:get \
+          -s "$GITHUB_WORKSPACE/.github/settings.xml" \
+          -DgroupId=org.eirik \
+          -Dartifact=spring-demo \
+          -Dversion=0.0.1-SNAPSHOT \
+          -Dpackaging=jar \
+          -Ddest="$GITHUB_WORKSPACE/spring-demo-0.0.1-SNAPSHOT.jar" \
+
+      - name: Verify downloaded artifact
+        run: |
+          echo "Verifying downloaded artifact..."
+          if [ -f "$GITHUB_WORKSPACE/spring-demo-0.0.1-SNAPSHOT.jar" ]; then
+            echo "Artifact downloaded successfully."
+          else
+            echo "Artifact download failed."
+            exit 1
+          fi
+      
+        
+        
+
+#          -Dartifact=org.techcloud0:azure-sql-edge:1.0-SNAPSHOT:jar:1.0-SNAPSHOT \
+#          -DremoteRepositories=https://pkgs.dev.azure.com/techcloud0/_packaging/bax/maven/v1
