@@ -27,7 +27,7 @@ jobs:
           mvn dependency:get \
           -s "$GITHUB_WORKSPACE/.github/settings.xml" \
           -DgroupId=org.eirik \
-          -Dartifact=spring-demo \
+          -artifactId=spring-demo \
           -Dversion=0.0.1-SNAPSHOT \
 #          -Ddest="$GITHUB_WORKSPACE/spring-demo-0.0.1-SNAPSHOT.jar" \
 
