@@ -2,10 +2,17 @@ name: Download Artifact
 
 on:
   push:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to deploy'
+        required: true
+        default: '0.0.1-SNAPSHOT'
 
 jobs:
   download:
     runs-on: ubuntu-latest
+    environment: dev
     permissions:
       contents: read
       packages: read
@@ -35,3 +42,27 @@ jobs:
           mvn dependency:copy \
           -Dartifact=org.eirik:spring-demo:0.0.1-SNAPSHOT \
           -DoutputDirectory=$GITHUB_WORKSPACE
+
+  run-in-test:
+    runs-on: ubuntu-latest
+    needs: download
+    environment: test
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21 and Maven
+        uses: actions/setup-java@v4
+        with:
+          java-version: 21
+          distribution: temurin
+          cache: maven
+
+      - name: Run tests
+        run: |
+          echo "Running tests...in test environment"
+          echo "secret: ${{ secrets.MY_SECRET }}"
+          mvn test \
+          -s "$GITHUB_WORKSPACE/.github/settings.xml"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
