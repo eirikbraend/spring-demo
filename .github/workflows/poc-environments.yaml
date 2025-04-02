@@ -33,3 +33,15 @@ jobs:
       - name: print
         run: echo "Running in test environment"
 
+      - name: Create secrets.txt
+        run: |
+          echo "MY_SECRET_1=$MY_SECRET_1" >> secrets.txt
+          echo "MY_SECRET_2=$MY_SECRET_2" >> secrets.txt
+        env:
+          MY_SECRET_1: ${{ secrets.MY_SECRET }}
+          MY_SECRET_2: ${{ secrets.MY_TEST_SECRET }}
+
+      - name: Display secrets.txt (for debugging - remove in production)
+        run: cat secrets.txt
+
+
